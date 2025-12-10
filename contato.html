@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Arquitetura de Performance</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: #e5e5e5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        h1 { color: #00d4aa; border-bottom: 2px solid #00d4aa; padding-bottom: 0.5rem; margin-bottom: 2rem; }
+        .back-link { display: inline-block; margin-bottom: 2rem; color: #00d4aa; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+        
+        /* Estilos do formulário */
+        .form-container { background: #1a1a1a; padding: 2rem; border-radius: 8px; }
+        .form-group { margin-bottom: 1.5rem; }
+        label { display: block; margin-bottom: 0.5rem; color: #aaa; font-size: 0.9rem; }
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            color: #e5e5e5;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #00d4aa;
+        }
+        button {
+            background: #00d4aa;
+            color: #0a0a0a;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover { background: #00b894; }
+        
+        /* Info de contato direto */
+        .direct-contact {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: #0a0a0a;
+            border-left: 4px solid #00d4aa;
+        }
+        .email-link {
+            font-family: 'Courier New', monospace;
+            color: #00d4aa;
+            font-size: 1.1rem;
+        }
+        
+        /* Mensagens de sucesso/erro (inicialmente escondidas) */
+        .success-message, .error-message {
+            display: none;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+        .success-message {
+            background: #002200;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+        }
+        .error-message {
+            background: #220000;
+            color: #ff4444;
+            border: 1px solid #ff4444;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">← Voltar para a página principal</a>
+    
+    <h1>📬 Contato Técnico</h1>
+    <p>Para análise de projetos, consultoria ou desenvolvimento de automações.</p>
+    
+    <!-- Mensagens de status (escondidas inicialmente) -->
+    <div class="success-message" id="successMsg">
+        ✅ Mensagem enviada com sucesso! Responderei em até 24h.
+    </div>
+    <div class="error-message" id="errorMsg">
+        ❌ Erro ao enviar mensagem. Use o e-mail direto: irving@ruas.dev.br
+    </div>
+    
+    <!-- FORMULÁRIO NETLIFY -->
+    <div class="form-container">
+        <form name="contato" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <!-- Campo anti-spam (escondido) -->
+            <p class="hidden">
+                <label>Não preencha este campo se for humano: <input name="bot-field" /></label>
+            </p>
+            
+            <div class="form-group">
+                <label for="nome">Nome *</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">E-mail *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="empresa">Empresa/Projeto</label>
+                <input type="text" id="empresa" name="empresa">
+            </div>
+            
+            <div class="form-group">
+                <label for="tipo">Tipo de Projeto *</label>
+                <select id="tipo" name="tipo" required>
+                    <option value="" disabled selected>Selecione uma opção</option>
+                    <option value="consultoria">Consultoria em Automação</option>
+                    <option value="desenvolvimento">Desenvolvimento de Sistema</option>
+                    <option value="analise">Análise de Infraestrutura</option>
+                    <option value="outro">Outro</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="orcamento">Orçamento Disponível *</label>
+                <select id="orcamento" name="orcamento" required>
+                    <option value="" disabled selected>Selecione uma faixa</option>
+                    <option value="menos-5k">Até R$ 5.000</option>
+                    <option value="5k-10k">R$ 5.000 - R$ 10.000</option>
+                    <option value="10k-25k">R$ 10.000 - R$ 25.000</option>
+                    <option value="mais-25k">Acima de R$ 25.000</option>
+                    <option value="a-definir">A definir após proposta</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="mensagem">Desafio Específico *</label>
+                <textarea id="mensagem" name="mensagem" rows="5" required
+                          placeholder="Descreva brevemente o problema ou objetivo..."></textarea>
+            </div>
+            
+            <button type="submit">Enviar Proposta Técnica</button>
+        </form>
+    </div>
+    
+    <!-- Contato direto -->
+    <div class="direct-contact">
+        <h3>📧 Contato Direto</h3>
+        <p>Prefira e-mail direto para assuntos urgentes:</p>
+        <p class="email-link">irving@ruas.dev.br</p>
+        <p><small>Resposta geralmente em 12-24h.</small></p>
+    </div>
+
+    <script>
+        // Estilo para campo anti-spam
+        document.querySelector('.hidden').style.display = 'none';
+        
+        // Manipulação do formulário
+        const form = document.querySelector('form[name="contato"]');
+        const successMsg = document.getElementById('successMsg');
+        const errorMsg = document.getElementById('errorMsg');
+        
+        // Detectar envio bem-sucedido pela Netlify
+        if (window.location.search.includes('submission=true')) {
+            successMsg.style.display = 'block';
+            form.reset();
+        }
+        
+        // Detectar erro (Netlify adiciona parâmetro)
+        if (window.location.search.includes('error=true')) {
+            errorMsg.style.display = 'block';
+        }
+        
+        // Validação adicional
+        form.addEventListener('submit', function(e) {
+            const orcamento = document.getElementById('orcamento').value;
+            const tipo = document.getElementById('tipo').value;
+            
+            // Validação customizada
+            if (!tipo || !orcamento) {
+                e.preventDefault();
+                errorMsg.style.display = 'block';
+                errorMsg.textContent = '❌ Preencha todos os campos obrigatórios.';
+                window.scrollTo(0, 0);
+            }
+        });
+    </script>
+</body>
+</html>
