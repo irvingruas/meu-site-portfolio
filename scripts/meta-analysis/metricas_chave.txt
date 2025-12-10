@@ -1,0 +1,16 @@
+============================================================
+📊 MÉTRICAS CHAVE META ADS
+============================================================
+
+Data da análise: 10/12/2025 17:01
+Arquivo analisado: dados_teste.csv
+
+📈 ÚLTIMOS 7 DIAS:
+• Gasto Total: R$ 0.00
+• Leads Total: 0
+• CAC Médio: R$ 0.00
+• CTR Médio: 0.00%
+• Média/dia: 0.0 leads
+
+🎯 RECOMENDAÇÕES:
+- CAC excelente: Aumentar orçamento das melhores campanhas
